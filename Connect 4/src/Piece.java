@@ -6,7 +6,7 @@ import java.net.URL;
 public class Piece {
 	
 	private int value;
-	public static int turnCntr;//counts turns; but this means one side will always go first
+	private static int turnCntr;//counts turns; but this means one side will always go first
 	private Image img;
 	private int x, y;
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
@@ -20,17 +20,17 @@ public class Piece {
 	}
 	
 	public void setValue() {
-		if(turnCntr%2 == 0) value = 1;
-		if(turnCntr%2 == 1) value = 2;
+		if(turnCntr%2 == 0) value = 1;//RED CHIP
+		if(turnCntr%2 != 0) value = 2;//BLACK CHIP
 	}
 	
 	public void setImage() {
-		if(turnCntr % 2 == 0) {//RED CHIP
+		if(turnCntr%2 == 0) {//RED CHIP
 			//value for red
 			img = getImage("red poker chip.png");
 			init(100, 100);
 		}
-		if(turnCntr % 2 != 0) {//BLACK CHIP
+		if(turnCntr%2 != 0) {//BLACK CHIP
 			//value for black
 			img = getImage("black poker chip.png");
 			init(100, 100);
@@ -42,8 +42,12 @@ public class Piece {
 		setImage();
 	}
 	
-	public static int getTurnCntr() {//Static method so you don't need to use an object --> "Piece.getTurnCntr()"
+	public static int getTurnCntr() {
 		return turnCntr;
+	}
+	
+	public static void setTurnCntr() {
+		turnCntr++;
 	}
 	
 	private Image getImage(String path) {

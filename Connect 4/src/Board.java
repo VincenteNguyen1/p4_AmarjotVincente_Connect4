@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
@@ -11,21 +12,20 @@ import javax.swing.Timer;
 public class Board extends JPanel implements MouseListener {
 	//change the size of the board if you need to
 	private int len = 6;
-	private int width = 7;
+	private int cols = 7;
 	private static Piece[][] board;
+	private Image img;
 	
 	/* constructor for MainPain class */
 	public Board() {
-		
-//		f.setLayout(new GridLayout(rows,cols));
-
 		JFrame f = new JFrame("Example Drawing");
 		f.setSize(800,600); //width and height
+		f.setLayout(new GridLayout(len,cols));
 		f.add(this);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 		
-		board = new Piece[len][width];
+		board = new Piece[len][cols];
 		
 		for(int r = 0; r < board.length; r++) {
 			for(int c = 0; c < board[0].length; c++) {
@@ -34,17 +34,17 @@ public class Board extends JPanel implements MouseListener {
 		}
 	}
 	
-	public void addPiece(int col) {
+	public void addPiece(int col) {//adds a piece at a certain column and automatically decides what team was placing.
 		int r = board.length-1;
-		while(board[r][col].getValue() > 0) {
-			if(r - 1 < 0) {
-				System.out.println("Cannot Place Piece Here");
+		while(board[r][col].getValue() > 0) {//drops piece to the bottom
+			if(r - 1 < 0) {//If the piece cannot be placed, then it stops the method
+				System.out.println("Cannot Place Piece At Column: " + col);
 				return;
 			}
 			r--;
 		}
 		board[r][col].setPiece();
-		Piece.turnCntr++;
+		Piece.setTurnCntr();
 	}
 	
 	public static void printBoard() {
@@ -54,6 +54,7 @@ public class Board extends JPanel implements MouseListener {
 			}
 			System.out.println("");
 		}
+		if(Piece.getTurnCntr()%2 == 0) { System.out.println("Red Team Next (1)"); }else{ System.out.println("Black Team Next (2)"); }
 	}
 	
 	public Piece[][] getBoard() {
