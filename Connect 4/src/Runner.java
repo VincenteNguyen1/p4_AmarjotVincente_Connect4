@@ -18,8 +18,6 @@ public class Runner {
 		board.addPiece(5);
 		Board.printBoard();
 
-		
-		
 	}
 	
 	

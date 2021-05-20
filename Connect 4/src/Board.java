@@ -97,6 +97,28 @@ public class Board extends JPanel implements MouseListener {
 		return "";
 	}
 	
+	public String checkFourVerticle() {
+		for(int r = board.length - 1; r > 0; r--) {
+			for(int c = 0; c < board[0].length - 4; c++) {
+				if(board[r][c].getValue() == 1) {//RED TEAM
+					if(board[r][c + 1].getValue() == 1 &&
+					   board[r][c + 2].getValue() == 1 && 
+					   board[r][c + 3].getValue() == 1) {
+						return "Red";
+					}
+				}
+				else if(board[r][c].getValue() == 2) {//BLACK TEAM
+					if(board[r][c + 1].getValue() == 2 &&
+					   board[r][c + 2].getValue() == 2 && 
+					   board[r][c + 3].getValue() == 2) {
+						return "Black";
+					}
+				}
+			}
+		}
+		return "";
+	}
+	
 	
 	
 	
