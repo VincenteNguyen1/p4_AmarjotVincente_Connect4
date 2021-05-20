@@ -68,11 +68,7 @@ public class Piece {
 
 	//Things to add to this method:
 	/*
-	 * A Paint method maybe or a way to display all of the images 
+	 * A Paint method/a way to display all of the images 
 	 * 
-	 * Change the method so that when a piece is created it's value is set to zero instead of of 1 or two,
-	 * and then make a setter for the value using the turncounter
-	 * 
-	 * add getter and setter for turncntr
 	 */
 }

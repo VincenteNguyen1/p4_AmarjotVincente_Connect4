@@ -10,13 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Board extends JPanel implements MouseListener {
-	//change the size of the board if you need to
 	private int len = 6;
 	private int cols = 7;
 	private static Piece[][] board;
 	private Image img;
 	
-	/* constructor for MainPain class */
 	public Board() {
 		JFrame f = new JFrame("Example Drawing");
 		f.setSize(800,600); //width and height
@@ -34,7 +32,13 @@ public class Board extends JPanel implements MouseListener {
 		}
 	}
 	
-	public void addPiece(int col) {//adds a piece at a certain column and automatically decides what team was placing.
+	/*
+	 * adds a piece at a certain column and automatically decides what team was placing.
+	 * 
+	 * if a piece cannot be placed in a column, it will return without incrementing turnCntr so that the same
+	 * player can go again
+	 */
+	public void addPiece(int col) {
 		int r = board.length-1;
 		while(board[r][col].getValue() > 0) {//drops piece to the bottom
 			if(r - 1 < 0) {//If the piece cannot be placed, then it stops the method
@@ -45,9 +49,19 @@ public class Board extends JPanel implements MouseListener {
 		}
 		board[r][col].setPiece();
 		Piece.setTurnCntr();
+		
+		//checks for four in a row horizontally
+		if(checkFourHorizontal().length() > 0) {
+			System.out.println(checkFourHorizontal() + " Team Wins!");
+		}
 	}
 	
-	public static void printBoard() {
+	/*
+	 * Just prints out the board in the console
+	 * 
+	 * also prints out what team will be added next
+	 */
+	public static void printBoard() {//Static method so you can call with Board class itself
 		for(int r = 0; r < board.length; r++) {
 			for(int c = 0; c < board[0].length; c++) {
 				System.out.print(board[r][c].getValue() + " ");
@@ -60,6 +74,34 @@ public class Board extends JPanel implements MouseListener {
 	public Piece[][] getBoard() {
 		return board;
 	}
+	
+	public String checkFourHorizontal() {
+		for(int r = board.length - 1; r > 0; r--) {
+			for(int c = 0; c < board[0].length - 4; c++) {
+				if(board[r][c].getValue() == 1) {//RED TEAM
+					if(board[r][c + 1].getValue() == 1 &&
+					   board[r][c + 2].getValue() == 1 && 
+					   board[r][c + 3].getValue() == 1) {
+						return "Red";
+					}
+				}
+				else if(board[r][c].getValue() == 2) {//BLACK TEAM
+					if(board[r][c + 1].getValue() == 2 &&
+					   board[r][c + 2].getValue() == 2 && 
+					   board[r][c + 3].getValue() == 2) {
+						return "Black";
+					}
+				}
+			}
+		}
+		return "";
+	}
+	
+	
+	
+	
+	
+	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 
