@@ -69,8 +69,7 @@ public class Board extends JPanel implements MouseListener {
 		
 		if(checkTie().length() > 0) {
 			System.out.println(checkTie());
-		}
-		
+		}	
 	
 	}
 	
@@ -185,13 +184,15 @@ public class Board extends JPanel implements MouseListener {
 	}
 	
 	
+	
 	public String checkTie() {
 		int ctr =0;
 		for(int row=0; row < board.length; row ++) {
-		for(int col = 0; col < board[row].length; col ++) {
+		for(int col = 0; col < board[row].length; col ++) {// scans each rol and col
 			
 			if(board [row] [col].getValue() == 1 || board [row] [col].getValue() == 2 ) {
 				ctr ++;
+				
 				
 			}
 			if(ctr == len *cols) {	
@@ -203,7 +204,7 @@ public class Board extends JPanel implements MouseListener {
 	return " ";
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
