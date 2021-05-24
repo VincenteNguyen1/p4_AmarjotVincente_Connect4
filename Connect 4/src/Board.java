@@ -12,7 +12,7 @@ import javax.swing.Timer;
 public class Board extends JPanel implements MouseListener {
 	private int len = 6;
 	private int cols = 7;
-	private static Piece[][] board;
+	private Piece[][] board;
 	private Image img;
 	
 	public Board() {
@@ -50,10 +50,12 @@ public class Board extends JPanel implements MouseListener {
 		board[r][col].setPiece();
 		Piece.setTurnCntr();
 		
-		//checks for four in a row horizontally
-		if(checkFourHorizontal().length() > 0) {
-			System.out.println(checkFourHorizontal() + " Team Wins!");
+		//checks for four in a row
+		if(checkFour()) {
+			reset();
+			System.out.println("New Game: " + Piece.getTurn() + " Team Starts");
 		}
+		
 	}
 	
 	/*
@@ -61,18 +63,46 @@ public class Board extends JPanel implements MouseListener {
 	 * 
 	 * also prints out what team will be added next
 	 */
-	public static void printBoard() {//Static method so you can call with Board class itself
+	public void printBoard() {//Static method so you can call with Board class itself
 		for(int r = 0; r < board.length; r++) {
 			for(int c = 0; c < board[0].length; c++) {
 				System.out.print(board[r][c].getValue() + " ");
 			}
 			System.out.println("");
 		}
-		if(Piece.getTurnCntr()%2 == 0) { System.out.println("Red Team Next (1)"); }else{ System.out.println("Black Team Next (2)"); }
 	}
 	
 	public Piece[][] getBoard() {
 		return board;
+	}
+	
+	public void reset() {
+		board = new Piece[len][cols];
+		for(int r = 0; r < board.length; r++) {
+			for(int c = 0; c < board[0].length; c++) {
+				board[r][c] = new Piece();
+			}
+		}
+	}
+	
+	public boolean checkFour() {
+		if(checkFourHorizontal().length() > 0) {
+			System.out.println(checkFourHorizontal() + " Team Wins!");
+			return true;
+		}
+		if(checkFourVerticle().length() > 0) {
+			System.out.println(checkFourVerticle() + " Team Wins!");
+			return true;
+		}
+		if(checkFourUpDiagonal().length() > 0) {
+			System.out.println(checkFourUpDiagonal() + " Team Wins!");
+			return true;
+		}
+		if(checkFourUpDiagonalD().length() > 0) {
+			System.out.println(checkFourUpDiagonalD() + " Team Wins!");
+			return true;
+		}
+		return false;
 	}
 	
 	public String checkFourHorizontal() {
@@ -87,7 +117,7 @@ public class Board extends JPanel implements MouseListener {
 				}
 				else if(board[r][c].getValue() == 2) {//BLACK TEAM
 					if(board[r][c + 1].getValue() == 2 &&
-					   board[r][c + 2].getValue() == 2 && 
+					   board[r][c + 2].getValue() == 2 &&
 					   board[r][c + 3].getValue() == 2) {
 						return "Black";
 					}
@@ -98,19 +128,19 @@ public class Board extends JPanel implements MouseListener {
 	}
 	
 	public String checkFourVerticle() {
-		for(int r = board.length - 1; r > 0; r--) {
-			for(int c = 0; c < board[0].length - 4; c++) {
+		for(int r = board.length - 1; r > 4; r--) {
+			for(int c = 0; c < board[0].length; c++) {
 				if(board[r][c].getValue() == 1) {//RED TEAM
-					if(board[r][c + 1].getValue() == 1 &&
-					   board[r][c + 2].getValue() == 1 && 
-					   board[r][c + 3].getValue() == 1) {
+					if(board[r - 1][c].getValue() == 1 &&
+					   board[r - 2][c].getValue() == 1 && 
+					   board[r - 3][c].getValue() == 1) {
 						return "Red";
 					}
 				}
 				else if(board[r][c].getValue() == 2) {//BLACK TEAM
-					if(board[r][c + 1].getValue() == 2 &&
-					   board[r][c + 2].getValue() == 2 && 
-					   board[r][c + 3].getValue() == 2) {
+					if(board[r - 1][c].getValue() == 2 &&
+					   board[r - 2][c].getValue() == 2 && 
+					   board[r - 3][c].getValue() == 2) {
 						return "Black";
 					}
 				}
@@ -119,13 +149,50 @@ public class Board extends JPanel implements MouseListener {
 		return "";
 	}
 	
+	public String checkFourUpDiagonal() {
+		for(int r =3; r < board.length; r++) {
+			for(int c = 0; c < board[r].length -3; c++) {
+				if(board[r][c].getValue() == 1) {//RED TEAM
+					if(board[r-1][c + 1].getValue() == 1 &&
+					   board[r-2][c + 2].getValue() == 1 && 
+					   board[r-3][c + 3].getValue() == 1) {
+						return "Red";
+					}
+				}
+				else if(board[r][c].getValue() == 2) {//BLACK TEAM
+					if(board[r-1][c + 1].getValue() == 2 &&
+					   board[r-2][c + 2].getValue() == 2 && 
+					   board[r-3][c + 3].getValue() == 2) {
+						return "Black";
+					}
+				}
+			}
+		}
+		return "";
+	}
+	public String checkFourUpDiagonalD() {
+		for(int r =0; r < board.length-3; r++) {
+			for(int c = 0; c < board[r].length -3; c++) {
+				if(board[r][c].getValue() == 1) {//RED TEAM
+					if(board[r+1][c + 1].getValue() == 1 &&
+					   board[r+2][c + 2].getValue() == 1 && 
+					   board[r+3][c + 3].getValue() == 1) {
+						return "Red";
+					}
+				}
+				else if(board[r][c].getValue() == 2) {//BLACK TEAM
+					if(board[r+1][c + 1].getValue() == 2 &&
+					   board[r+2][c + 2].getValue() == 2 && 
+					   board[r+3][c + 3].getValue() == 2) {
+						return "Black";
+					}
+				}
+			}
+		}
+		return "";
+	}
 	
-	
-	
-	
-	
-	
-	///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {

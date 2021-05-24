@@ -42,6 +42,12 @@ public class Piece {
 		setImage();
 	}
 	
+	public static String getTurn() {
+		if(turnCntr%2 == 0) return "Red";//RED CHIP
+		if(turnCntr%2 != 0) return "Black";//BLACK CHIP
+		return "";
+	}
+	
 	public static int getTurnCntr() {
 		return turnCntr;
 	}
@@ -49,6 +55,10 @@ public class Piece {
 	public static void setTurnCntr() {
 		turnCntr++;
 	}
+	
+//	public static void resetTurnCntr() {
+//		turnCntr = 0;
+//	}
 	
 	private Image getImage(String path) {
 		Image tempImage = null;
