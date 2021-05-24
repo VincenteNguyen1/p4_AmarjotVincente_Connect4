@@ -58,6 +58,7 @@ public class Board extends JPanel implements MouseListener {
 		
 	}
 	
+
 	/*
 	 * Just prints out the board in the console
 	 * 

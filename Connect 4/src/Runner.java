@@ -5,18 +5,19 @@ public class Runner {
 		
 		Board board = new Board();
 		
-		board.addPiece(0);
-		board.addPiece(0);
-		board.addPiece(0);
-		board.addPiece(0);
-		board.addPiece(2);
-		board.addPiece(0);
-		board.addPiece(3);
-		board.addPiece(3);
-		board.addPiece(4);
-		board.addPiece(3);
-		board.addPiece(5);
-		Board.printBoard();
+		board.addPiece(0);//1
+		board.addPiece(1);//2
+		board.addPiece(1);//1
+		board.addPiece(2);//2
+		board.addPiece(3);//1
+		board.addPiece(2);//2
+		board.addPiece(2);//1
+		board.addPiece(3);//2
+		board.addPiece(3);//1
+		board.addPiece(4);//2
+		board.addPiece(3);//1
+
+		board.printBoard();
 
 	}
 	

@@ -43,8 +43,8 @@ public class Piece {
 	}
 	
 	public static String getTurn() {
-		if(turnCntr%2 == 0) return "Red";//RED CHIP
-		if(turnCntr%2 != 0) return "Black";//BLACK CHIP
+		if(turnCntr%2 == 0) return "Red";
+		if(turnCntr%2 != 0) return "Black";
 		return "";
 	}
 	
