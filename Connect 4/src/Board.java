@@ -171,6 +171,7 @@ public class Board extends JPanel implements MouseListener {
 		}
 		return "";
 	}
+	
 	public String checkFourUpDiagonalD() {
 		for(int r =0; r < board.length-3; r++) {
 			for(int c = 0; c < board[r].length -3; c++) {

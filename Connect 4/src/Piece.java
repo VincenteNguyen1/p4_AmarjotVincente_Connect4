@@ -2,6 +2,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+import java.applet.Applet;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class Piece {
 	
@@ -27,13 +30,13 @@ public class Piece {
 	public void setImage() {
 		if(turnCntr%2 == 0) {//RED CHIP
 			//value for red
-			img = getImage("red poker chip.png");
-			init(100, 100);
+			this.img = getImage("red poker chip.png");
+			//init(100, 100);
 		}
 		if(turnCntr%2 != 0) {//BLACK CHIP
 			//value for black
-			img = getImage("black poker chip.png");
-			init(100, 100);
+			this.img = getImage("black poker chip.png");
+			//init(100, 100);
 		}
 	}
 	
@@ -60,13 +63,14 @@ public class Piece {
 //		turnCntr = 0;
 //	}
 	
-	private Image getImage(String path) {
-		Image tempImage = null;
+	public Image getImage(String path) {
+		Image tempImage = null; 
 		try {
-			URL imageURL = Piece.class.getResource(path);
-			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {
-			e.printStackTrace();
+			URL url = ImageTest.class.getResource(path);
+			tempImage = Toolkit.getDefaultToolkit().getImage(url);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		return tempImage;
 	}
