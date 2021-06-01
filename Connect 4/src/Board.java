@@ -1,8 +1,11 @@
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +25,8 @@ public class Board extends JPanel implements MouseListener {
 		f.add(this);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
+		
+		img = getImage("Connect4 Board.png");
 		
 		board = new Piece[len][cols];
 		
@@ -58,7 +63,18 @@ public class Board extends JPanel implements MouseListener {
 		
 	}
 	
-
+	public Image getImage(String path) {
+		Image tempImage = null; 
+		try {
+			URL url = ImageTest.class.getResource(path);
+			tempImage = Toolkit.getDefaultToolkit().getImage(url);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return tempImage;
+	}
+	
 	/*
 	 * Just prints out the board in the console
 	 * 
