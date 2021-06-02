@@ -10,11 +10,11 @@ import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Board extends JPanel implements MouseListener {
+public class Board {//extends JPanel implements MouseListener {
 	private int len = 6;
 	private int cols = 7;
 	private Piece[][] board;
-	public Image img = null;
+	public Image img;
 	private int x = 0, y = 0;
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
 	
@@ -42,9 +42,7 @@ public class Board extends JPanel implements MouseListener {
 	}
 	
 	public void paint(Graphics g) {	
-		if(img == null) {
-			img = getImage("Board.png");
-		}
+		img = getImage("Board.png");
 		Image temp = img;
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(temp, tx, null);
@@ -229,42 +227,42 @@ public class Board extends JPanel implements MouseListener {
 	}
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////
-
-		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-			//On a click, figure out what tile was clicked
-//			Tile theTile = (Tile) arg0.getComponent();
-//			System.out.println(theTile.r);
-			
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
+//
+//		@Override
+//		public void mouseClicked(MouseEvent arg0) {
+//			// TODO Auto-generated method stub
+//			
+//			//On a click, figure out what tile was clicked
+////			Tile theTile = (Tile) arg0.getComponent();
+////			System.out.println(theTile.r);
+//			
+//			
+//		}
+//
+//		@Override
+//		public void mouseEntered(MouseEvent arg0) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//
+//		@Override
+//		public void mouseExited(MouseEvent arg0) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//
+//		@Override
+//		public void mousePressed(MouseEvent arg0) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//
+//		@Override
+//		public void mouseReleased(MouseEvent arg0) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//		
 }
 	
 
