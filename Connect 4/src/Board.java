@@ -1,40 +1,58 @@
-import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
 import java.net.URL;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 public class Board extends JPanel implements MouseListener {
 	private int len = 6;
 	private int cols = 7;
 	private Piece[][] board;
-	private Image img;
+	public Image img = null;
+	private int x = 0, y = 0;
+	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
+	
+	public static void main(String[] args) {		
+		//Board board = new Board();
+	}
 	
 	public Board() {
-		JFrame f = new JFrame("Example Drawing");
-		f.setSize(800,600); //width and height
-		f.setLayout(new GridLayout(len,cols));
-		f.add(this);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
+//		JFrame f = new JFrame("Connect Four");
+//		f.setSize(800,600); //width and height
+//		f.setLayout(new GridLayout(len,cols));
+//		f.add(this);
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.setVisible(true);
 		
-		img = getImage("Connect4 Board.png");
+		img = getImage("Board.png");
+		init(x, y);
 		
 		board = new Piece[len][cols];
-		
 		for(int r = 0; r < board.length; r++) {
 			for(int c = 0; c < board[0].length; c++) {
 				board[r][c] = new Piece();
 			}
 		}
+	}
+	
+	public void paint(Graphics g) {	
+		if(img == null) {
+			img = getImage("Board.png");
+		}
+		Image temp = img;
+		Graphics2D g2 = (Graphics2D) g;
+		g2.drawImage(temp, tx, null);
+	}
+
+	private void init(double a, double b) {
+		tx.setToTranslation(a, b);
+		tx.scale(1, 1);
 	}
 	
 	/*
