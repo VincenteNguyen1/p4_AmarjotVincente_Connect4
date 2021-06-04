@@ -3,7 +3,7 @@ public class Runner {
 
 	public static void main(String[] args) {
 		
-		Board board = new Board();
+		/*/Board board = new Board();
 		
 		// check the diagonal code
 		board.addPiece(0);
@@ -49,8 +49,8 @@ public class Runner {
 		
 		
 		Board.printBoard();
-		
-		
+	/*/	
+		new GUI();
 		
 	
 	}	

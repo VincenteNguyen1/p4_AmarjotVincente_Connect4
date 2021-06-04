@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class GUI extends JFrame{
+public class GUI extends JFrame  implements ActionListener{
 	
 	JFrame window; 
 	Container con;
@@ -25,85 +26,65 @@ public class GUI extends JFrame{
 	JLabel title; 
 	Font titleFont = new Font("Times New Roman", Font.PLAIN, 60);
 	Font ButtonFont = new Font("Times New Roman", Font.PLAIN, 40);
-	//JPanel TitleBoard= new JPPanel ("Connect 4 board");
+
 	JButton startButton;
-	TitleScreenHandler tsHandler = new TitleScreenHandler ();
 	
 	
-	public static void main(String[] args) {
-		
-		new GUI();
+	public GUI (){
 		
 		
-	}
-	
-	public GUI() {
-		
-		
-		
+		//makes the window
 		window = new JFrame ();
 		window.setSize(900,900);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.getContentPane().setBackground(Color.black);;
+		window.getContentPane().setBackground(Color.black);
 		window.setLayout(null);
 		window.setVisible(true);
 		con =  window.getContentPane();
 		
+	
 		
-		
-		
+		// makes connect 4 title on front page
 		titlePanel = new JPanel ();
 		titlePanel.setBounds(50, 50, 400, 75);
 		titlePanel.setBackground(Color.black);
 		title =  new JLabel("CONNECT 4");
 		title.setForeground(Color.white);
 		title.setFont(titleFont);
-		
+		titlePanel.add(title);
+		con.add(titlePanel);
 	
-		// makes the start button
+		// sets the background
 		startPanel = new JPanel ();
 		startPanel.setBounds(600, 300, 100, 100);
 		startPanel.setBackground(Color.black);
+		con.add(startPanel);
+		
+		// makes the start button
 		startButton = new JButton("Start");
 		startButton.setBackground(Color.black);
 		startButton.setForeground(Color.white);
 		startButton.setFont(ButtonFont);
-		startButton.addActionListener(tsHandler);
-		
-		
-		
-		
-		// adds everything into the frame
-		titlePanel.add(title);
-		con.add(titlePanel);
-		con.add(startPanel);
+	//startPanel.setBounds(150,50,100,60);
 		startPanel.add(startButton);
-		
-		
-		
-		
-		
+		startButton.addActionListener(this);
 		
 	}
 	
-	public void gameScreen() {
-		Board game = new Board ();
-		
-		
-	}
 	
-	public  class TitleScreenHandler implements ActionListener{
-	
-		public void actionPerfromed(ActionEvent ae) {
-		String cmd = ae.getActionCommand();
-		if(cmd.equals("go")) 
-		{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
 		
+			
+			startButton.setVisible(false);
+			titlePanel.setVisible(false);
+			window.getContentPane().setBackground(Color.black);
+			startButton.setBackground(Color.black);
+			startPanel.setBackground(Color.black);
+			
+			
 		}
-		
-		
-	}
 }
 
 
-}
