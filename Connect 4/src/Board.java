@@ -208,12 +208,13 @@ public class Board extends JPanel implements MouseListener {
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-			//On a click, figure out what tile was clicked
-//			Tile theTile = (Tile) arg0.getComponent();
-//			System.out.println(theTile.r);
-			
+			int x = arg0.getX();
+			int y= arg0.getY();
+			if (x >0) {
+				
+				System.out.println(x);
+				System.out.println(y);
+			}
 			
 		}
 

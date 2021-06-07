@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -68,7 +69,7 @@ public class GUI extends JFrame  implements ActionListener{
 	//startPanel.setBounds(150,50,100,60);
 		startPanel.add(startButton);
 		startButton.addActionListener(this);
-		
+		window.getContentPane().addMouseListener(new Click());
 	}
 	
 	
@@ -85,6 +86,42 @@ public class GUI extends JFrame  implements ActionListener{
 			
 			
 		}
+
+	/*/@Override
+	public void mouseClicked(MouseEvent arg0) {
+		int x = arg0.getX();
+		int y= arg0.getY();
+		System.out.println(x);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	/*/
 }
+
+
+
+
 
 
