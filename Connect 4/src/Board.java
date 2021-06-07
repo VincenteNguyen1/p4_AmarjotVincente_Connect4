@@ -15,12 +15,12 @@ public class Board {//extends JPanel implements MouseListener {
 	private int cols = 7;
 	private Piece[][] board;
 	public Image img;
-	private int x = 0, y = 0;
+	private int x = 0, y = 65;
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
 	
-	public static void main(String[] args) {		
-		//Board board = new Board();
-	}
+//	public static void main(String[] args) {		
+//		//Board board = new Board();
+//	}
 	
 	public Board() {
 //		JFrame f = new JFrame("Connect Four");
@@ -42,10 +42,12 @@ public class Board {//extends JPanel implements MouseListener {
 	}
 	
 	public void paint(Graphics g) {	
-		img = getImage("Board.png");
-		Image temp = img;
+		if(img == null) {
+			this.img = getImage("Connect4 Board.png");
+		}
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(temp, tx, null);
+		//g2.drawImage(img, tx, null);
+		g2.drawImage(img, x, y, 884, 700, null);
 	}
 
 	private void init(double a, double b) {
@@ -63,7 +65,7 @@ public class Board {//extends JPanel implements MouseListener {
 		int r = board.length-1;
 		while(board[r][col].getValue() > 0) {//drops piece to the bottom
 			if(r - 1 < 0) {//If the piece cannot be placed, then it stops the method
-				System.out.println("Cannot Place Piece At Column: " + col);
+				System.out.println("Cannot Place Piece At Column: " + col + ". Please try a Different Column.");
 				return;
 			}
 			r--;
@@ -73,8 +75,8 @@ public class Board {//extends JPanel implements MouseListener {
 		
 		//checks for four in a row
 		if(checkFour()) {
-			reset();
-			System.out.println("New Game: " + Piece.getTurn() + " Team Starts");
+			//reset();
+			//System.out.println("New Game: " + Piece.getTurn() + " Team Starts");
 		}
 		
 	}
@@ -87,6 +89,7 @@ public class Board {//extends JPanel implements MouseListener {
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			//System.out.println("Can't Find the File");
 		}
 		return tempImage;
 	}

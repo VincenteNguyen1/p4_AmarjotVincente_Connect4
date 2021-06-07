@@ -29,15 +29,17 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 	
 	boolean isActive = true;
 	Board board = new Board();
-	
+	StartScreen screen = new StartScreen();
 	
 	public static void main(String[] args) {
 		new GUI();
 		Music backgroundMusic = new Music("Local_Forecast_-_Elevator.wav", true);
-		backgroundMusic.run();
+		//backgroundMusic.run();
 	}
 	
 	public void paint(Graphics g) {
+		//if(isActive) board.paint(g);
+		//screen.paint(g);
 		board.paint(g);
 	}
 	
