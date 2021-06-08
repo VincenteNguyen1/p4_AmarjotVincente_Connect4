@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -27,7 +28,6 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 	JButton startButton;
 	Timer t ;
 	
-	boolean isActive = true;
 	Board board = new Board();
 	StartScreen screen = new StartScreen();
 	
@@ -38,8 +38,18 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 	}
 	
 	public void paint(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
 		screen.paint(g);
-		//board.paint(g);
+		board.paint(g);
+		
+		for(int r = 0, y1 = 9; r < board.getBoard().length; r++, y1 += 115) {
+			int x1 = 17;
+			for(int c = 0; c < board.getBoard()[0].length; c++, x1 += 125) {
+				if(board.getBoard()[r][c].img != null) {
+					g2.drawImage(board.getBoard()[r][c].img, x1, y1, 100, 100, null);
+				}
+			}
+		}
 	}
 	
 	public GUI() {
@@ -55,87 +65,31 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 	@Override
 	public void mousePressed(MouseEvent arg0) {	
 		
-		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {	
 		
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		
+	public void mouseExited(MouseEvent arg0) {	
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		
+	public void mouseReleased(MouseEvent arg0) {	
 		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		repaint();
-		
+		repaint();	
 	}
 
 }
-
-
-
-//////////////
-
-/*
-		int x = arg0.getX();//sets variable x equal to mouse x position
-		
-		if(isActive)
-		{
-			//Column 1
-			if(x >= 0 && x < 25) 
-			{
-				board.addPiece(0);
-			}
-			//Column 2
-			if(x >= 25 && x < 50) 
-			{
-				board.addPiece(1);
-			}
-			//Column 3
-			if(x >= 50 && x < 75) 
-			{
-				board.addPiece(2);
-			}
-			//Column 4
-			if(x >= 75 && x < 100) 
-			{
-				board.addPiece(3);
-			}
-			//Column 5
-			if(x >= 100 && x < 125) 
-			{
-				board.addPiece(4);
-			}
-			//Column 6
-			if(x >= 125 && x < 150) 
-			{
-				board.addPiece(5);
-			}
-			//Column 6
-			if(x >= 150 && x < 175) 
-			{
-				board.addPiece(6);
-			}
-		}
-		board.addPiece(0);
-		board.printBoard();
- */
-
