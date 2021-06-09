@@ -10,26 +10,15 @@ import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Board {//extends JPanel implements MouseListener {
+public class Board {
 	private int len = 6;
 	private int cols = 7;
 	private Piece[][] board;
 	public Image img;
-	private int x = 0, y = 65;
+	private int x = 0, y = 0;
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
-	
-//	public static void main(String[] args) {		
-//		//Board board = new Board();
-//	}
-	
+
 	public Board() {
-//		JFrame f = new JFrame("Connect Four");
-//		f.setSize(800,600); //width and height
-//		f.setLayout(new GridLayout(len,cols));
-//		f.add(this);
-//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		f.setVisible(true);
-		
 		img = getImage("Board.png");
 		init(x, y);
 		
@@ -46,8 +35,7 @@ public class Board {//extends JPanel implements MouseListener {
 			this.img = getImage("Connect4 Board.png");
 		}
 		Graphics2D g2 = (Graphics2D) g;
-		//g2.drawImage(img, tx, null);
-		g2.drawImage(img, x, y, 884, 700, null);
+		g2.drawImage(img, x, y, 885, 690, null);
 	}
 
 	private void init(double a, double b) {
@@ -72,13 +60,6 @@ public class Board {//extends JPanel implements MouseListener {
 		}
 		board[r][col].setPiece();
 		Piece.setTurnCntr();
-		
-		//checks for four in a row
-		if(checkFour()) {
-			//reset();
-			//System.out.println("New Game: " + Piece.getTurn() + " Team Starts");
-		}
-		
 	}
 	
 	public Image getImage(String path) {
@@ -121,24 +102,24 @@ public class Board {//extends JPanel implements MouseListener {
 		}
 	}
 	
-	public boolean checkFour() {
+	public String checkFour() {
 		if(checkFourHorizontal().length() > 0) {
 			System.out.println(checkFourHorizontal() + " Team Wins!");
-			return true;
+			return checkFourHorizontal() ;
 		}
 		if(checkFourVerticle().length() > 0) {
 			System.out.println(checkFourVerticle() + " Team Wins!");
-			return true;
+			return checkFourVerticle();
 		}
 		if(checkFourUpDiagonal().length() > 0) {
 			System.out.println(checkFourUpDiagonal() + " Team Wins!");
-			return true;
+			return checkFourUpDiagonal();
 		}
 		if(checkFourUpDiagonalD().length() > 0) {
 			System.out.println(checkFourUpDiagonalD() + " Team Wins!");
-			return true;
+			return checkFourUpDiagonalD();
 		}
-		return false;
+		return "";
 	}
 	
 	public String checkFourHorizontal() {
@@ -228,44 +209,7 @@ public class Board {//extends JPanel implements MouseListener {
 		}
 		return "";
 	}
-	
-///////////////////////////////////////////////////////////////////////////////////////////////
-//
-//		@Override
-//		public void mouseClicked(MouseEvent arg0) {
-//			// TODO Auto-generated method stub
-//			
-//			//On a click, figure out what tile was clicked
-////			Tile theTile = (Tile) arg0.getComponent();
-////			System.out.println(theTile.r);
-//			
-//			
-//		}
-//
-//		@Override
-//		public void mouseEntered(MouseEvent arg0) {
-//			// TODO Auto-generated method stub
-//			
-//		}
-//
-//		@Override
-//		public void mouseExited(MouseEvent arg0) {
-//			// TODO Auto-generated method stub
-//			
-//		}
-//
-//		@Override
-//		public void mousePressed(MouseEvent arg0) {
-//			// TODO Auto-generated method stub
-//			
-//		}
-//
-//		@Override
-//		public void mouseReleased(MouseEvent arg0) {
-//			// TODO Auto-generated method stub
-//			
-//		}
-//		
+		
 }
 	
 
