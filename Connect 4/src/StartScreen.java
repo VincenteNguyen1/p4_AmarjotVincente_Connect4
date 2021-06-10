@@ -51,5 +51,4 @@ public class StartScreen {
 		return tempImage;
 	}
 	
-	
 }
