@@ -10,10 +10,12 @@ public class StartScreen {
 	private static boolean isActive = true;
 	private String path = "connectFourName.png";
 	private Image img = null;
+	private Image playText = null;
 	private int x = 9, y = -25;
 	
 	public StartScreen() {
 		img = getImage(path);
+		playText = getImage("play.png");
 	}
 	
 	public void paint(Graphics g) {
@@ -24,8 +26,9 @@ public class StartScreen {
 		g2.fillRect(0, 0, 900, 230);
 		g2.drawImage(img, x, y, 850, 300, null);
 		g2.setColor(Color.white);
-		g2.fillOval(70, 280, 300, 150);
-		g2.fillOval(70, 480, 300, 150);
+		g2.fillOval(70, 380, 300, 150);
+		g2.setColor(Color.black);
+		g2.drawImage(playText, 95, 405, 250, 100, null);
 	}
 	
 	public static void setIsActive(boolean a) {

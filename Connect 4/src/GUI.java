@@ -46,7 +46,6 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 	public void paint(Graphics g) {	
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		
 		if(StartScreen.getIsActive()) {
 			screen.paint(g);
 		}	
@@ -77,7 +76,6 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 			g2.drawLine(840, 10, 870, 40);
 			g2.drawLine(840, 40, 870, 10);
 		}
-		
 	}
 	
 	public GUI() {
@@ -183,7 +181,7 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 		int y = e.getY();//sets variable y equal to mouse y position
 		if(StartScreen.getIsActive()) {
 			if(x >= 70 && x <= 370) {
-				if(y >= 280 && y <= 430) {
+				if(y >= 380 && y <= 530) {
 					StartScreen.setIsActive(false);
 				}
 			}
