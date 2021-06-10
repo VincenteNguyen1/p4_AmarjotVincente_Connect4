@@ -5,8 +5,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
-public class ImageTest extends Applet
-{
+@SuppressWarnings("serial")
+public class ImageTest extends Applet {
 	
 	ImageTest test = new ImageTest();
 	
@@ -29,17 +29,14 @@ public class ImageTest extends Applet
 		
 	}
 	
-	public Image getImage(String path)
-	{
+	public Image getImage(String path) {
 		Image tempImage = null; 
 		
-		try 
-		{
+		try {
 			URL url = ImageTest.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(url);
 		}
-		catch (Exception e) 
-		{
+		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		

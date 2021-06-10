@@ -10,7 +10,6 @@ public class StartScreen {
 	private static boolean isActive = true;
 	private String path = "connectFourName.png";
 	private Image img = null;
-	private Image img2 = null;
 	private int x = 9, y = -25;
 	
 	public StartScreen() {
@@ -18,8 +17,6 @@ public class StartScreen {
 	}
 	
 	public void paint(Graphics g) {
-		if(img == null) img = getImage(path);
-		if(img2 == null) img2 = getImage("Board.png");
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(Color.gray);
 		g2.fillRect(0, 0, 900, 900);
@@ -29,7 +26,6 @@ public class StartScreen {
 		g2.setColor(Color.white);
 		g2.fillOval(70, 280, 300, 150);
 		g2.fillOval(70, 480, 300, 150);
-		g2.drawImage(img2, 445, 295, 350, 300, null);
 	}
 	
 	public static void setIsActive(boolean a) {

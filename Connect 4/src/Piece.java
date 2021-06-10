@@ -9,8 +9,6 @@ public class Piece {
 	private static int turnCntr;//counts turns; but this means one side will always go first
 	public Image img = null;
 	public String path = "";
-	private int x, y;
-	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
 
 	public Piece() {
 		value = 0;
@@ -31,22 +29,16 @@ public class Piece {
 			//value for red
 			this.path = "red poker chip.png";
 			this.img = getImage("red poker chip.png");
-			//init(100, 100);
 		}
 		if(turnCntr%2 != 0) {//BLACK CHIP
 			//value for black
 			this.path = "black poker chip.png";
 			this.img = getImage("black poker chip.png");
-			//init(100, 100);
 		}
 	}
 	public String getPath() {
 		return path;
 	}
-	
-//	public Image getImage2() {
-//		return img;
-//	}
 	
 	public void setPiece() {
 		setValue();
@@ -67,10 +59,6 @@ public class Piece {
 		turnCntr++;
 	}
 	
-//	public static void resetTurnCntr() {
-//		turnCntr = 0;
-//	}
-	
 	public Image getImage(String path) {
 		Image tempImage = null; 
 		try {
@@ -81,11 +69,6 @@ public class Piece {
 			System.out.println(e.getMessage());
 		}
 		return tempImage;
-	}
-	
-	private void init(double a, double b) {
-		tx.setToTranslation(a, b);
-		tx.scale(1, 1);
 	}
 
 	public Image getImage2() {

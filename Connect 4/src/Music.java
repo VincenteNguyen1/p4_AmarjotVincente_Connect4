@@ -1,12 +1,9 @@
 import java.io.File;
-import java.io.IOException;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Music  implements Runnable  {
@@ -77,6 +74,7 @@ public class Music  implements Runnable  {
 	     t.start();
 	}
 	
+	@SuppressWarnings("unused")
 	private void start() {
 	     t = new Thread (this, "run");
 	     t.start ();

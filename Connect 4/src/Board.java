@@ -1,14 +1,9 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Board {
 	private int len = 6;
@@ -16,18 +11,18 @@ public class Board {
 	private Piece[][] board;
 	public Image img;
 	private int x = 0, y = 0;
-	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
+	private int firstTurn;
 
 	public Board() {
+		firstTurn = 0;
 		img = getImage("Board.png");
-		init(x, y);
-		
 		board = new Piece[len][cols];
 		for(int r = 0; r < board.length; r++) {
 			for(int c = 0; c < board[0].length; c++) {
 				board[r][c] = new Piece();
 			}
 		}
+		System.out.println(Piece.getTurn() + " Team Starts.");
 	}
 	
 	public void paint(Graphics g) {	
@@ -36,11 +31,6 @@ public class Board {
 		}
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, x, y, 885, 690, null);
-	}
-
-	private void init(double a, double b) {
-		tx.setToTranslation(a, b);
-		tx.scale(1, 1);
 	}
 	
 	/*
@@ -60,6 +50,7 @@ public class Board {
 		}
 		board[r][col].setPiece();
 		Piece.setTurnCntr();
+		firstTurn++;
 	}
 	
 	public Image getImage(String path) {
@@ -93,31 +84,35 @@ public class Board {
 		return board;
 	}
 	
-	public void reset() {
-		board = new Piece[len][cols];
-		for(int r = 0; r < board.length; r++) {
-			for(int c = 0; c < board[0].length; c++) {
-				board[r][c] = new Piece();
-			}
-		}
-	}
-	
 	public String checkFour() {
 		if(checkFourHorizontal().length() > 0) {
-			System.out.println(checkFourHorizontal() + " Team Wins!");
+			//System.out.println(checkFourHorizontal() + " Team Wins!");
 			return checkFourHorizontal() ;
 		}
 		if(checkFourVerticle().length() > 0) {
-			System.out.println(checkFourVerticle() + " Team Wins!");
+			//System.out.println(checkFourVerticle() + " Team Wins!");
 			return checkFourVerticle();
 		}
 		if(checkFourUpDiagonal().length() > 0) {
-			System.out.println(checkFourUpDiagonal() + " Team Wins!");
+			//System.out.println(checkFourUpDiagonal() + " Team Wins!");
 			return checkFourUpDiagonal();
 		}
 		if(checkFourUpDiagonalD().length() > 0) {
-			System.out.println(checkFourUpDiagonalD() + " Team Wins!");
+			//System.out.println(checkFourUpDiagonalD() + " Team Wins!");
 			return checkFourUpDiagonalD();
+		}
+		return "";
+	}
+	
+	public String checkTie() {
+		int ctr = 0;
+		for(int r = 0; r< board.length; r ++) {
+			for(int c = 0; c < board[r].length; c ++) {// scans each rol and col
+					if(board[r][c].getValue() == 1 || board[r][c].getValue() == 2) {
+							ctr ++;
+					}
+					if(ctr == len * cols) return "tie";
+			}
 		}
 		return "";
 	}
@@ -208,6 +203,14 @@ public class Board {
 			}
 		}
 		return "";
+	}
+	
+	public int getFirstTurn() {
+		return firstTurn;
+	}
+	
+	public void setFirstTurn(int num) {
+		firstTurn = num;
 	}
 		
 }
