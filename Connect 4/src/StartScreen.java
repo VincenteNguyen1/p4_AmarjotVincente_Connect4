@@ -6,17 +6,26 @@ import java.awt.Toolkit;
 import java.net.URL;
 
 public class StartScreen {
-
+	
+	//Instance Variables
 	private static boolean isActive = true;
 	private String path = "connectFourName.png";
 	private Image img = null;
 	private Image playText = null;
 	private int x = 9, y = -25;
 	
+	//Constructor
 	public StartScreen() {
 		img = getImage(path);
 		playText = getImage("play.png");
 	}
+	
+	//Methods:
+	
+	/*
+	 * Paints the StartScreen;
+	 * Creates the Text and the button.
+	 */
 	
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -31,12 +40,9 @@ public class StartScreen {
 		g2.drawImage(playText, 95, 405, 250, 100, null);
 	}
 	
-	public static void setIsActive(boolean a) {
-		isActive = a;
-	}
-	public static boolean getIsActive() {
-		return isActive;
-	}
+	/*
+	 * Method to get the image. 
+	 */
 	
 	public Image getImage(String path) {
 		Image tempImage = null; 
@@ -49,6 +55,14 @@ public class StartScreen {
 			//System.out.println("Can't Find the File");
 		}
 		return tempImage;
+	}
+	
+	public static void setIsActive(boolean a) {//setter for isActive
+		isActive = a;
+	}
+	
+	public static boolean getIsActive() {//getter for isActive
+		return isActive;
 	}
 	
 }

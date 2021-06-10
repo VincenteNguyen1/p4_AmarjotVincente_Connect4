@@ -2,17 +2,19 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 public class Board {
+	
+	//Instance Variables
 	private int len = 6;
 	private int cols = 7;
 	private Piece[][] board;
 	public Image img;
 	private int x = 0, y = 0;
 	private int firstTurn;
-
+	
+	//Constructor
 	public Board() {
 		firstTurn = 0;
 		img = getImage("Board.png");
@@ -22,23 +24,28 @@ public class Board {
 				board[r][c] = new Piece();
 			}
 		}
-		System.out.println(Piece.getTurn() + " Team Starts.");
-	}
+		//Prints out what team starts, because it alternates every round.
+		System.out.println(Piece.getTurn() + " Team Starts.");}
+	
+	//Methods:
+	
+	/*
+	 * Paint method
+	 */
 	
 	public void paint(Graphics g) {	
-		if(img == null) {
-			this.img = getImage("Connect4 Board.png");
-		}
+		if(img == null) img = getImage("Connect4 Board.png");
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, x, y, 885, 690, null);
 	}
 	
 	/*
-	 * adds a piece at a certain column and automatically decides what team was placing.
-	 * 
-	 * if a piece cannot be placed in a column, it will return without incrementing turnCntr so that the same
-	 * player can go again
+	 * Adds a piece at a certain column and automatically drops it down.
+	 * Whatever team placed it is decided by the turnCntr.
+	 * If a piece cannot be placed in a column, it will return without incrementing turnCntr so that the same
+	 * player can go again, and print out that you cannot place a piece at this column.
 	 */
+	
 	public void addPiece(int col) {
 		int r = board.length-1;
 		while(board[r][col].getValue() > 0) {//drops piece to the bottom
@@ -53,24 +60,10 @@ public class Board {
 		firstTurn++;
 	}
 	
-	public Image getImage(String path) {
-		Image tempImage = null; 
-		try {
-			URL url = ImageTest.class.getResource(path);
-			tempImage = Toolkit.getDefaultToolkit().getImage(url);
-		}
-		catch (Exception e) {
-			System.out.println(e.getMessage());
-			//System.out.println("Can't Find the File");
-		}
-		return tempImage;
-	}
-	
 	/*
 	 * Just prints out the board in the console
-	 * 
-	 * also prints out what team will be added next
 	 */
+	
 	public void printBoard() {//Static method so you can call with Board class itself
 		for(int r = 0; r < board.length; r++) {
 			for(int c = 0; c < board[0].length; c++) {
@@ -80,9 +73,9 @@ public class Board {
 		}
 	}
 	
-	public Piece[][] getBoard() {
-		return board;
-	}
+	/*
+	 * Checks the board for four in a row in any direction, and returns the winner in terms of a String 
+	 */
 	
 	public String checkFour() {
 		if(checkFourHorizontal().length() > 0) {
@@ -104,6 +97,10 @@ public class Board {
 		return "";
 	}
 	
+	/*
+	 * Checks the board for a tie game 
+	 */
+	
 	public String checkTie() {
 		int ctr = 0;
 		for(int r = 0; r< board.length; r ++) {
@@ -111,23 +108,29 @@ public class Board {
 					if(board[r][c].getValue() == 1 || board[r][c].getValue() == 2) {
 							ctr ++;
 					}
-					if(ctr == len * cols) return "tie";
+					if(ctr == len * cols) return "Tie";
 			}
 		}
 		return "";
 	}
 	
+	/*
+	 * Checks the board for four in a row horizontally, and returns the winner in the form of a string.
+	 */
+	
 	public String checkFourHorizontal() {
 		for(int r = board.length - 1; r > 0; r--) {
 			for(int c = 0; c < board[0].length - 4; c++) {
-				if(board[r][c].getValue() == 1) {//RED TEAM
+				//RED TEAM
+				if(board[r][c].getValue() == 1) {
 					if(board[r][c + 1].getValue() == 1 &&
 					   board[r][c + 2].getValue() == 1 && 
 					   board[r][c + 3].getValue() == 1) {
 						return "Red";
 					}
 				}
-				else if(board[r][c].getValue() == 2) {//BLACK TEAM
+				//BLACK TEAM
+				else if(board[r][c].getValue() == 2) {
 					if(board[r][c + 1].getValue() == 2 &&
 					   board[r][c + 2].getValue() == 2 &&
 					   board[r][c + 3].getValue() == 2) {
@@ -139,17 +142,23 @@ public class Board {
 		return "";
 	}
 	
+	/*
+	 * Checks the board for four in a row vertically, and returns the winner in the form of a string.
+	 */
+	
 	public String checkFourVerticle() {
 		for(int r = board.length - 1; r > 4; r--) {
 			for(int c = 0; c < board[0].length; c++) {
-				if(board[r][c].getValue() == 1) {//RED TEAM
+				//RED TEAM
+				if(board[r][c].getValue() == 1) {
 					if(board[r - 1][c].getValue() == 1 &&
 					   board[r - 2][c].getValue() == 1 && 
 					   board[r - 3][c].getValue() == 1) {
 						return "Red";
 					}
 				}
-				else if(board[r][c].getValue() == 2) {//BLACK TEAM
+				//BLACK TEAM
+				else if(board[r][c].getValue() == 2) {
 					if(board[r - 1][c].getValue() == 2 &&
 					   board[r - 2][c].getValue() == 2 && 
 					   board[r - 3][c].getValue() == 2) {
@@ -161,17 +170,24 @@ public class Board {
 		return "";
 	}
 	
+	/*
+	 * Checks the board for four in a row diagonally, from the top left to the bottom right.
+	 * Returns the winner in the form of a string.
+	 */
+	
 	public String checkFourUpDiagonal() {
 		for(int r =3; r < board.length; r++) {
 			for(int c = 0; c < board[r].length -3; c++) {
-				if(board[r][c].getValue() == 1) {//RED TEAM
+				//RED TEAM
+				if(board[r][c].getValue() == 1) {
 					if(board[r-1][c + 1].getValue() == 1 &&
 					   board[r-2][c + 2].getValue() == 1 && 
 					   board[r-3][c + 3].getValue() == 1) {
 						return "Red";
 					}
 				}
-				else if(board[r][c].getValue() == 2) {//BLACK TEAM
+				//BLACK TEAM
+				else if(board[r][c].getValue() == 2) {
 					if(board[r-1][c + 1].getValue() == 2 &&
 					   board[r-2][c + 2].getValue() == 2 && 
 					   board[r-3][c + 3].getValue() == 2) {
@@ -183,17 +199,24 @@ public class Board {
 		return "";
 	}
 	
+	/*
+	 * Checks the board for four in a row diagonally, from the top right to the bottom left.
+	 * Returns the winner in the form of a string.
+	 */
+	
 	public String checkFourUpDiagonalD() {
 		for(int r =0; r < board.length-3; r++) {
 			for(int c = 0; c < board[r].length -3; c++) {
-				if(board[r][c].getValue() == 1) {//RED TEAM
+				//RED TEAM
+				if(board[r][c].getValue() == 1) {
 					if(board[r+1][c + 1].getValue() == 1 &&
 					   board[r+2][c + 2].getValue() == 1 && 
 					   board[r+3][c + 3].getValue() == 1) {
 						return "Red";
 					}
 				}
-				else if(board[r][c].getValue() == 2) {//BLACK TEAM
+				//BLACK TEAM
+				else if(board[r][c].getValue() == 2) {
 					if(board[r+1][c + 1].getValue() == 2 &&
 					   board[r+2][c + 2].getValue() == 2 && 
 					   board[r+3][c + 3].getValue() == 2) {
@@ -205,12 +228,31 @@ public class Board {
 		return "";
 	}
 	
-	public int getFirstTurn() {
+	/*
+	 * Method to get Images 
+	 */
+	
+	public Image getImage(String path) {
+		Image tempImage = null; 
+		try {
+			URL url = ImageTest.class.getResource(path);
+			tempImage = Toolkit.getDefaultToolkit().getImage(url);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+			//System.out.println("Can't Find the File");
+		}
+		return tempImage;
+	}
+	
+	//Getters & Setters:
+	
+	public int getFirstTurn() {//getter for firstTurn
 		return firstTurn;
 	}
 	
-	public void setFirstTurn(int num) {
-		firstTurn = num;
+	public Piece[][] getBoard() {//getter for board
+		return board;
 	}
 		
 }

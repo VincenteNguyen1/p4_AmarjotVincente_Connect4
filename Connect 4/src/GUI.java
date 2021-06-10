@@ -19,6 +19,7 @@ import java.awt.Color;
 @SuppressWarnings("serial")
 public class GUI extends JPanel implements ActionListener, MouseListener { 
 	
+	//Variables
 	JFrame window; 
 	Container con;
 	JPanel titlePanel, startPanel;
@@ -37,18 +38,28 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 	
 	public boolean gameOver;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) {//Main Method
 		new GUI();
 		Music backgroundMusic = new Music("Local_Forecast_-_Elevator.wav", true);
 		backgroundMusic.run();
 	}
 	
-	public void paint(Graphics g) {	
-		super.paintComponent(g);
+	public void paint(Graphics g) {//Paint Method
+		super.paintComponent(g);//refreshes the method properly
 		Graphics2D g2 = (Graphics2D) g;
+		
+		/*
+		 * If the Start Screen is 'active,' then it paints it. 
+		 */
+		
 		if(StartScreen.getIsActive()) {
 			screen.paint(g);
 		}	
+		
+		/*
+		 * If the game is active, it paints the board and then all of the pieces on top of it.
+		 */
+		
 		if(!StartScreen.getIsActive()) {
 			board.paint(g);
 			for(int r = 0, y1 = 9; r < board.getBoard().length; r++, y1 += 115) {
@@ -60,6 +71,12 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 				}
 			}
 		}
+		
+		/*
+		 * If someone won the game, then it displays whoever won (or of its a tie), it shows who won, and creates an
+		 * x-button in the top right of the screen
+		 */
+		
 		if(gameOver) {
 			if(board.checkFour().equals("Red")) {
 				g2.drawImage(redWin, 0, 0, 880, 690, null);
@@ -78,7 +95,8 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 		}
 	}
 	
-	public GUI() {
+	//Constructor
+	public GUI() {//Creates the JFrame
 		gameOver = false;
 		window = new JFrame ();
 		window.setSize(895,729);
@@ -90,9 +108,9 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 		window.addMouseListener(this);
 	}
 	
-	public void setGameOver(boolean b) {
-		gameOver = b;
-	}
+	/*
+	 * Method to get images
+	 */
 	
 	public Image getImage(String path) {
 		Image tempImage = null; 
@@ -132,41 +150,59 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		//Sound files:
 		Music singleChip = new Music("single chip drop.wav", false);
 		Music emptyBoard = new Music("emptying the board.wav", false);
+		
 		int x = e.getX();//sets variable x equal to mouse x position
-		int y = e.getY();//sets variable y equal to mouse y position
+		
+		/*
+		 * If the game is running, will drop the chips into a column depending on your mouse location.
+		 * 
+		 */
 		
 		if(!StartScreen.getIsActive() && !gameOver) {
+			//Column 1
 			if(x >= 30 && x <= 130) {
 				board.addPiece(0);
 				singleChip.run();
 			}
+			//Column 2
 			if(x >= 155 && x <= 250) {
 				board.addPiece(1);
 				singleChip.run();
 			}
+			//Column 3
 			if(x >= 275 && x <= 375) {
 				board.addPiece(2);
 				singleChip.run();
 			}
+			//Column 4
 			if(x >= 400 && x <= 500) {
 				board.addPiece(3);
 				singleChip.run();
 			}
+			//Column 5
 			if(x >= 525 && x <= 625) {
 				board.addPiece(4);
 				singleChip.run();
 			}
+			//Column 6
 			if(x >= 650 && x <= 750) {
 				board.addPiece(5);
 				singleChip.run();
 			}
+			//Column 7
 			if(x >= 775 && x <= 875) {
 				board.addPiece(6);
 				singleChip.run();
 			}
+			
+			/*
+			 * When the game ends, moves to a winner screen and resets the board.
+			 * Plays the empty board sound effect also.
+			 */
+			
 			if(board.checkFour().length() > 0 || board.checkTie().length() > 0) {
 				gameOver = true;
 				emptyBoard.play();
@@ -176,9 +212,13 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		int x = e.getX();//sets variable x equal to mouse x position
 		int y = e.getY();//sets variable y equal to mouse y position
+		
+		/*
+		 * If the start screen is active, and you click the button you will be put into the game.
+		 */
+		
 		if(StartScreen.getIsActive()) {
 			if(x >= 70 && x <= 370) {
 				if(y >= 380 && y <= 530) {
@@ -186,6 +226,11 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 				}
 			}
 		}
+		
+		/*
+		 * If the game is over, and you click the x in the top right, you will be sent back the the start screen
+		 */
+		
 		if(gameOver) {
 			if(x >= 830 && x <= 880) {
 				if(y >= 0 && y <= 80) {
@@ -195,6 +240,10 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 				}
 			}
 		}
+	}
+	
+	public void setGameOver(boolean b) {
+		gameOver = b;
 	}
 
 }

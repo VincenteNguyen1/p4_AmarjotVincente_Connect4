@@ -10,25 +10,22 @@ public class ImageTest extends Applet {
 	
 	ImageTest test = new ImageTest();
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-	}
-	
-	/////////////////////////////////////////////////////////////////////////////////////
-	
 	private Image img = null;
 	
-	public void paint(Graphics g) {
-		
-		this.setSize(680, 440);
-		
-		if (img ==  null) img = getImage("board.png");
+	/*
+	 * Paint method
+	 */
 	
+	public void paint(Graphics g) {
+		this.setSize(680, 440);
+		if (img ==  null) img = getImage("board.png");
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, 20, 20, 20, 20, this);   
-		
 	}
 	
+	/*
+	 * Method to get an image
+	 */
 	public Image getImage(String path) {
 		Image tempImage = null; 
 		
