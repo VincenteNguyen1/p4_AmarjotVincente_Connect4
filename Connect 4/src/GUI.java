@@ -107,23 +107,6 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 		window.setVisible(true);
 		window.addMouseListener(this);
 	}
-	
-	/*
-	 * Method to get images
-	 */
-	
-	public Image getImage(String path) {
-		Image tempImage = null; 
-		try {
-			URL url = ImageTest.class.getResource(path);
-			tempImage = Toolkit.getDefaultToolkit().getImage(url);
-		}
-		catch (Exception e) {
-			System.out.println(e.getMessage());
-			//System.out.println("Can't Find the File");
-		}
-		return tempImage;
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -244,6 +227,23 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 	
 	public void setGameOver(boolean b) {
 		gameOver = b;
+	}
+	
+	/*
+	 * Method to get images
+	 */
+	
+	public Image getImage(String path) {
+		Image tempImage = null; 
+		try {
+			URL url = ImageTest.class.getResource(path);
+			tempImage = Toolkit.getDefaultToolkit().getImage(url);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+			//System.out.println("Can't Find the File");
+		}
+		return tempImage;
 	}
 
 }
