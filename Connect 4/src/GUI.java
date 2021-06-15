@@ -145,6 +145,11 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 		 */
 		
 		if(!StartScreen.getIsActive() && !gameOver) {
+			
+			/*
+			 * Adds pieces to certain columns
+			 */
+			
 			//Column 1
 			if(x >= 30 && x <= 130) {
 				board.addPiece(0);
