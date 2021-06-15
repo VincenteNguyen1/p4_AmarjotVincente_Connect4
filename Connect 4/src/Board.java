@@ -258,7 +258,8 @@ public class Board {
 	public Piece[][] getBoard() {//getter for board
 		return board;
 	}
-		
+	
+	
 }
 	
 

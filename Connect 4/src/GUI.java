@@ -141,13 +141,12 @@ public class GUI extends JPanel implements ActionListener, MouseListener {
 		
 		/*
 		 * If the game is running, will drop the chips into a column depending on your mouse location.
-		 * 
 		 */
 		
 		if(!StartScreen.getIsActive() && !gameOver) {
 			
 			/*
-			 * Adds pieces to certain columns
+			 * Adds pieces to certain columns.
 			 */
 			
 			//Column 1
