@@ -86,6 +86,10 @@ public class Board {
 			//System.out.println(checkFourVerticle() + " Team Wins!");
 			return checkFourVerticle();
 		}
+		if(checkFourVerticle().length() > 0) {
+			//System.out.println(checkFourVerticle() + " Team Wins!");
+			return checkFourVerticle();
+		}
 		if(checkFourUpDiagonal().length() > 0) {
 			//System.out.println(checkFourUpDiagonal() + " Team Wins!");
 			return checkFourUpDiagonal();
@@ -205,7 +209,7 @@ public class Board {
 	 */
 	
 	public String checkFourUpDiagonalD() {
-		for(int r =0; r < board.length-3; r++) {
+		for(int r = 0; r < board.length-3; r++) {
 			for(int c = 0; c < board[r].length -3; c++) {
 				//RED TEAM
 				if(board[r][c].getValue() == 1) {
