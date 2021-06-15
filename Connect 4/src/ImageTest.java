@@ -39,5 +39,6 @@ public class ImageTest extends Applet {
 		
 		return tempImage;
 	}
+	
 
 }

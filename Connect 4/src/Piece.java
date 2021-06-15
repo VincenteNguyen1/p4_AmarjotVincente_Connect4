@@ -94,5 +94,6 @@ public class Piece {
 	public static void setTurnCntr() {//adds one to turnCntr
 		turnCntr++;
 	}
+	
 
 }
